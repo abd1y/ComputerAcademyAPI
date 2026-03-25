@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x_ze)v__=d&e2i&w%m##9pj#^!*)q*e0%ndlzf-fq1(*f)3vae'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -116,9 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  #هاي مهمه  حتى يشتغل و يرسل ايميلات
 EMAIL_HOST = 'smtp.gmail.com'  #هاي على منو  دنشتغل اني سويته على جيميل 
 EMAIL_USE_TLS = True # هاي شغلها و ما عليك
-EMAIL_HOST_USER = 'codeprogram2003@gmail.com' # ايميل  الشركه
+EMAIL_HOST_USER = config('EMAIL_HOST_USER ') # ايميل  الشركه
 DEFAULT_FROM_EMAIL = 'Computer Academic <codeprogram2003@gmail.com>' 
-EMAIL_HOST_PASSWORD = 'lulrasmmedqhkorl'  # هاي نحصله من رمز سري للتطبيقات بجيميل
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD ') 
 EMAIL_PORT = 587
 
 
