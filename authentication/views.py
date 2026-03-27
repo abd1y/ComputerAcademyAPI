@@ -324,7 +324,7 @@ def Profile_user(req,id):
     profile=Profile.objects.filter(user__id=id).first()
     if not profile:
         return Response({"erorr":"There is no profile for this user."},status=status.HTTP_404_NOT_FOUND)
-    summary_bank=Summary_Bank.objects.filter(user__id=id,Publish=True)
+    summary_bank=Summary_Bank.objects.filter(user__id=id,Publish=True).order_by('-id')
     data_summary=[]
     
     for Data_summary in summary_bank:
