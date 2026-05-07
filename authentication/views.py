@@ -126,13 +126,9 @@ def Longin(req):
         if not user.profile.Activ:
             return Response({"Erorr":"لم يتم تحقق من الحساب"},status=status.HTTP_405_METHOD_NOT_ALLOWED)
         return Response({
-            "id":user.id,
-            "Name":user.profile.Name,
-             "email":email,
-             "Bio":user.profile.Bio,
-            "Verified":user.profile.Verified,
-            "Profile_image":req.build_absolute_uri(user.profile.Profile_image.url),
-            "Token":token.key,
+            "id":user.id, 
+             "email":email, 
+            "Token":token.key, 
        
                          },status=status.HTTP_202_ACCEPTED)
          
@@ -158,11 +154,7 @@ def Reset_password(req):
     
     return Response({
             "id":user.id,
-            "first_name":user.first_name,
              "email":email,
-             "Bio":user.profile.Bio,
-            "Verified":user.profile.Verified,
-            "Profile_image":req.build_absolute_uri(user.profile.Profile_image.url),
             "Token":token.key,
     },status=status.HTTP_202_ACCEPTED)
 
@@ -268,11 +260,7 @@ def For_get_password_st3(req):
     token,create=Token.objects.get_or_create(user=user)
     return Response({
             "id":user.id,
-            "first_name":user.first_name,
              "email":email,
-             "Bio":user.profile.Bio,
-            "Verified":user.profile.Verified,
-            "Profile_image":req.build_absolute_uri(user.profile.Profile_image.url),
             "Token":token.key,
        
                          },status=status.HTTP_202_ACCEPTED)
@@ -324,7 +312,7 @@ def Profile_user(req,id):
     profile=Profile.objects.filter(user__id=id).first()
     if not profile:
         return Response({"erorr":"There is no profile for this user."},status=status.HTTP_404_NOT_FOUND)
-    summary_bank=Summary_Bank.objects.filter(user__id=id,Publish=True).order_by('-id')
+    summary_bank=Summary_Bank.objects.filter(user__id=id,Publish=True)
     data_summary=[]
     
     for Data_summary in summary_bank:
@@ -351,4 +339,24 @@ def Profile_user(req,id):
         })
     
         
-    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def UserSetting(req):
+   user=req.user  
+   profile=Profile.objects.filter(user=user).first()
+   if not profile:
+       return Response({
+           "erorr":"the user dont have a Token"
+       })
+       
+   else:
+       
+         return Response({
+               "Profile":{
+                "id":profile.id,
+                "Name":profile.Name,
+                "Profile_image":req.build_absolute_uri(user.profile.Profile_image.url),
+                "Bio":profile.Bio
+                }
+       })
+
