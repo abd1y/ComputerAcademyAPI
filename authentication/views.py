@@ -99,14 +99,13 @@ def SingIn(req):
 </body>
 </html>
         """
-        
-        send_mail(
-         'Verification Code',      
-    'رمز التحقق الخاص بك',   
-    'codeprogram2003@gmail.com', 
-    [user.email],              
-    html_message=html_contex 
-        )
+        resend.api_key = settings.RESEND_API_KEY
+        resend.Emails.send({
+        "from": "Computer Academic <codeprogram2003@gmail.com>",
+        "to": [user.email],
+        "subject": "رمز تحقق ",
+        "html": html_contex
+    })
         return Response({"Mesage":"تم انشاء حساب  بنجاح الان قم بتأكيد حسابك   ",       
             },status=status.HTTP_201_CREATED)
 
@@ -226,7 +225,7 @@ def For_get_password_st1(req):
    resend.api_key = settings.RESEND_API_KEY
 
    resend.Emails.send({
-        "from": "Computer Academic <onboarding@resend.dev>",
+        "from": "Computer Academic <codeprogram2003@gmail.com>",
         "to": [user.email],
         "subject": "اعادة تعيين كلمة السر",
         "html": html_contex

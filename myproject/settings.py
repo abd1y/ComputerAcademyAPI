@@ -115,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-DEFAULT_FROM_EMAIL = "Computer Academic <codeprogram2003@gmail.com>"
 
 RESEND_API_KEY = config("RESEND_API_KEY")
 
