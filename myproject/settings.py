@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-EMAIL_BACKEND = "django_resend.EmailBackend"
+
 
 DEFAULT_FROM_EMAIL = "Computer Academic <codeprogram2003@gmail.com>"
 
