@@ -113,13 +113,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  #هاي مهمه  حتى يشتغل و يرسل ايميلات
-EMAIL_HOST = 'smtp.gmail.com'  #هاي على منو  دنشتغل اني سويته على جيميل
-EMAIL_USE_TLS = True # هاي شغلها و ما عليك
-EMAIL_HOST_USER = config('EMAIL_HOST_USER') # ايميل  الشركه
-DEFAULT_FROM_EMAIL = 'Computer Academic <codeprogram2003@gmail.com>'
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = 587
+EMAIL_BACKEND = "django_resend.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "Computer Academic <codeprogram2003@gmail.com>"
+
+RESEND_API_KEY = config("RESEND_API_KEY")
 
 
 # Internationalization

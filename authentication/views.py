@@ -10,6 +10,8 @@ from .serializers import Singup,LongIn
 from django.core.mail import send_mail
 from rest_framework import status
 import random
+import resend 
+from django.conf import settings
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def SingIn(req):
@@ -185,9 +187,6 @@ def For_get_password_st1(req):
             <td align="center">
                 <table width="600" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td align="left" style="padding:10px;">
-                            <img src="https://i.ibb.co/PzfXzcMQ/Logo.png" alt="Logo" width="50" height="50" style="display:block;" />
-                        </td>
                         <td align="left" style="padding-left:10px; color:#ffffff; font-weight:bold; font-size:20px;">
                             Computer Academic
                         </td>
@@ -224,13 +223,14 @@ def For_get_password_st1(req):
 </body>
 </html>
         """
-   send_mail(
-       "اعادة تعين رمز السري",
-        "اعادة تعين رمز السري",   
-    'codeprogram2003@gmail.com', 
-    [user.email],
-    html_message= html_contex
-        )
+   resend.api_key = settings.RESEND_API_KEY
+
+   resend.Emails.send({
+        "from": "Computer Academic <onboarding@resend.dev>",
+        "to": [user.email],
+        "subject": "اعادة تعيين كلمة السر",
+        "html": html_contex
+    })
    return Response({"تم ارسال رمز سري الى بريد الالكتروني"},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
