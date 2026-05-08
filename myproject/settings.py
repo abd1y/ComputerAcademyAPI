@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
      'authentication',
      'Group',
      'Summary_Bank'
-
+   
 
 ]
 
@@ -113,10 +113,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-
-RESEND_API_KEY = config("RESEND_API_KEY")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  #هاي مهمه  حتى يشتغل و يرسل ايميلات
+EMAIL_HOST = 'smtp.gmail.com'  #هاي على منو  دنشتغل اني سويته على جيميل 
+EMAIL_USE_TLS = True # هاي شغلها و ما عليك
+EMAIL_HOST_USER = config('EMAIL_HOST_USER') # ايميل  الشركه
+DEFAULT_FROM_EMAIL = 'Computer Academic <codeprogram2003@gmail.com>' 
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
+EMAIL_PORT = 587
 
 
 # Internationalization
@@ -135,7 +138,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
