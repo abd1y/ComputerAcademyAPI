@@ -101,7 +101,7 @@ def SingIn(req):
         """
         resend.api_key = settings.RESEND_API_KEY
         resend.Emails.send({
-        "from": "Computer Academic <codeprogram2003@gmail.com>",
+        "from": "Computer Academic <codeprogram2003@resend.dev>",
         "to": [user.email],
         "subject": "رمز تحقق ",
         "html": html_contex
@@ -225,7 +225,7 @@ def For_get_password_st1(req):
    resend.api_key = settings.RESEND_API_KEY
 
    resend.Emails.send({
-        "from": "Computer Academic <codeprogram2003@gmail.com>",
+        "from": "Computer Academic <codeprogram2003@resend.dev>",
         "to": [user.email],
         "subject": "اعادة تعيين كلمة السر",
         "html": html_contex
